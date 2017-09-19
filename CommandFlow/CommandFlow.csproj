@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="ConsoleCommand.cs" />
     <Compile Include="ConsoleMachine.cs" />
-    <Compile Include="ConsoleMachine.TreeWriter.cs" />
+    <Compile Include="TreeWriter.cs" />
     <Compile Include="ConsoleSelect.cs" />
     <Compile Include="ConsoleOption.cs" />
     <Compile Include="ConsoleUtils.cs" />

@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace CommandFlow
 {
-    public partial class ConsoleMachine : ConsoleOption
+    /// <summary>
+    /// Console State Machine is responsible to control application flow
+    /// </summary>
+    public class ConsoleMachine : ConsoleOption
     {
+        /// <summary>
+        /// Stack of machines
+        /// </summary>
         private static Stack<ConsoleMachine> machines = new Stack<ConsoleMachine>();
 
+        /// <summary>
+        /// Current machine
+        /// </summary>
         public static ConsoleMachine CurrentMachine
         {
             get
@@ -18,22 +27,41 @@ namespace CommandFlow
             }
         }
 
+        /// <summary>
+        /// Create and start new console state machine
+        /// </summary>
+        /// <param name="select">Initial menu</param>
+        /// <param name="description">Description</param>
         public static void Start(ConsoleSelect select, string description = "Untitled")
         {
             ConsoleMachine machine = new ConsoleMachine(description, select);
             machine.Execute();
         }
 
+        /// <summary>
+        /// Create a new console state machine
+        /// </summary>
+        /// <param name="description">Description</param>
+        /// <param name="initialSelect">Initial menu</param>
         public ConsoleMachine(string description, ConsoleSelect initialSelect)
         {
             this.Description = description;
             this.SelectedOption = initialSelect;
         }
 
+        /// <summary>
+        /// Selected option
+        /// </summary>
         public ConsoleOption SelectedOption { get; private set; }
 
+        /// <summary>
+        /// Indicate state machine are running
+        /// </summary>
         public bool IsRunning { get; set; }
 
+        /// <summary>
+        /// Start state machine
+        /// </summary>
         public override void Execute()
         {
             machines.Push(this);
@@ -45,6 +73,9 @@ namespace CommandFlow
             machines.Pop();
         }
 
+        /// <summary>
+        /// Execute option behavior
+        /// </summary>
         private void ExecuteSelectedOption()
         {
             Console.Clear();
@@ -60,11 +91,18 @@ namespace CommandFlow
             }
         }
 
+        /// <summary>
+        /// Select previous option
+        /// </summary>
         private void Previous()
         {
             this.SelectedOption = this.SelectedOption.Parent ?? this.SelectedOption;
         }
 
+        /// <summary>
+        /// Wait user input, verify if is a correct option and set option to selected
+        /// </summary>
+        /// <param name="consoleSelect"></param>
         private void ReadSelectedOption(ConsoleSelect consoleSelect)
         {
             Console.WriteLine();
@@ -92,11 +130,22 @@ namespace CommandFlow
             }
         }
 
+        /// <summary>
+        /// Verify if selected option is valid in range
+        /// </summary>
+        /// <param name="consoleSelect">Current console select</param>
+        /// <param name="selectedOption">Next selected option</param>
+        /// <returns></returns>
         private bool IsValidRange(ConsoleSelect consoleSelect, int selectedOption)
         {
             return selectedOption > -1 && selectedOption < consoleSelect.Options.Count;
         }
 
+        /// <summary>
+        /// Write wrong option message
+        /// </summary>
+        /// <param name="selectedOptionText"></param>
+        /// <param name="consoleSelect"></param>
         private void WrongOption(string selectedOptionText, ConsoleSelect consoleSelect)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -105,6 +154,9 @@ namespace CommandFlow
             ReadSelectedOption(consoleSelect);
         }
 
+        /// <summary>
+        /// Exite console machine
+        /// </summary>
         public void Exit()
         {
             if (machines.Count == 1)
@@ -117,6 +169,9 @@ namespace CommandFlow
             this.IsRunning = false;
         }
 
+        /// <summary>
+        /// Write menu tree
+        /// </summary>
         public void WriteTree()
         {
             TreeWriter.Write(this.SelectedOption);

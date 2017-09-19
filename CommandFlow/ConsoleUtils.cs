@@ -10,6 +10,12 @@ namespace CommandFlow
     {
         public const char SPACE = (char)32;
 
+        /// <summary>
+        /// Writer header
+        /// </summary>
+        /// <param name="caption">Caption</param>
+        /// <param name="columns">Console columns</param>
+        /// <param name="decorator">Header decorator</param>
         public static void WriteHeader(string caption, int columns, char decorator = '*')
         {
             string decoratorString = new String(decorator, columns);
@@ -19,6 +25,12 @@ namespace CommandFlow
             Console.WriteLine(decoratorString);
         }
 
+        /// <summary>
+        /// Write centralized text
+        /// </summary>
+        /// <param name="text">Text</param>
+        /// <param name="columns">Console columns</param>
+        /// <param name="decorator">Decorator</param>
         public static void WriteCenterText(string text, int columns, string decorator = "*")
         {
             int countSpaces = ((columns - text.Length) / 2) - decorator.Length;

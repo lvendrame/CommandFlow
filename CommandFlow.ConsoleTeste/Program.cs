@@ -19,7 +19,7 @@ namespace CommandFlow.ConsoleTeste
             first.AddOption(new ConsoleCommand("Command One", () => { Console.WriteLine("Command One"); Console.ReadKey(); }));
             first.AddOption(new ConsoleCommand("Command Two", () => { Console.WriteLine("Command Two"); Console.ReadKey(); }));
             first.AddOption(new ConsoleCommand("Command Three", () => { Console.WriteLine("Command Three"); Console.ReadKey(); }));
-            first.AddOption(new ConsoleCommand("Command Four", () => { Console.WriteLine("Command Four"); Console.ReadKey(); }));            
+            first.AddOption(new ConsoleCommand("Command Four", () => { Console.WriteLine("Command Four"); Console.ReadKey(); }));          
             first.AddOption(new ConsoleCommand("Write Tree", () => { ConsoleMachine.CurrentMachine.WriteTree(); }));
 
 
@@ -27,6 +27,7 @@ namespace CommandFlow.ConsoleTeste
 
             ConsoleSelect secondOne = new ConsoleSelect("One", "Second menu - [1]");
             secondOne.AddOption(new ConsoleCommand("My method", MyMethod));
+            secondOne.AddOption(new ConsoleCommand("Paint", Paint.StartPaint));
             secondOne.AddOption(new ConsoleCommand("Force exit", () => ConsoleMachine.CurrentMachine.Exit()));
 
             second.AddOption(secondOne);

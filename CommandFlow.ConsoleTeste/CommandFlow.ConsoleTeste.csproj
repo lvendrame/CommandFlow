@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommanderFlow\CommandFlow.csproj">
+    <ProjectReference Include="..\CommandFlow\CommandFlow.csproj">
       <Project>{c5095af7-6770-433c-8bc2-d35d10022154}</Project>
       <Name>CommandFlow</Name>
     </ProjectReference>
